@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%
+	HttpSession session = request.getSession();
+	session.setAttribute("sRs", 0);
+%>
 <c:set var="ctp" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
@@ -52,7 +56,8 @@
         <td>${vo.idx}</td>
         
         <td>
-      		${vo.title}
+      		<a href="${ctp}/BoardContent.bo?idx=${vo.idx}">${vo.title}</a>
+      		
       		<c:if test="${vo.hour_diff <=24}"><img src="${ctp}/images/new.gif"/></c:if>
         </td>
         

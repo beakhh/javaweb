@@ -35,7 +35,7 @@
 	<h2>아이디 체크폼</h2>
 	<c:if test="${res == 1}">
 		<h4><font color="blue"><b>${mid}</b></font>아이디는 사용 가능합니다.</h4>
-		<p><input type="button" value="창닫기" onclic="sendCheck()" /></p>
+		<p><input type="button" value="창닫기" onclick="sendCheck()" /></p>
 	</c:if>
 	<c:if test="${res != 1}">
 		<h4><font color="blue"><b>${mid}</b></font>아이디는 이미 사용중인 아이디입니다..</h4>

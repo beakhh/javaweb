@@ -22,7 +22,7 @@
 	<div class="modal-content p-4">
 		<h2 class="text-center">회원 로그인</h2>
 		<p class="text-center">회원 아이디와 비밀번호를 입력해 주세요</p>
-	  <form name="myform" method="post" action="${ctp}/MemberInput.mem" class="was-validated">
+	  <form name="myform" method="post" action="${ctp}/MemberLoginOk.mem" class="was-validated">
 	    <div class="form-group">
 	      <label for="mid">회원 아이디</label>
 	      <input type="text" class="form-control" id="mid" name="mid" value="${mid}" placeholder="Enter username"  required autofocus />
