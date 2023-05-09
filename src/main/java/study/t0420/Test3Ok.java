@@ -1,10 +1,8 @@
 package study.t0420;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.URLEncoder;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

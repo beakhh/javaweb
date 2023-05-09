@@ -11,17 +11,17 @@
   <title>boardContent.jsp</title>
   <jsp:include page="/include/bs4.jsp" />
   <style>
-  	th{
-  		text-align: center;
-  		background-color:#eee;
-  	}
+      th{
+          text-align: center;
+          background-color:#eee;
+      }
   </style>
   <script>
-  	'use strict'
-  	
-  	function goodCheck() {
-			location.href="${ctp}/BoardGoodCheck.bo?idx=${vo.idx}";
-		}
+      'use strict'
+      
+      function goodCheck() {
+            location.href="${ctp}/BoardGoodCheck.bo?idx=${vo.idx}";
+        }
   </script>
 </head>
 <body>
@@ -52,7 +52,7 @@
       <td>${vo.homePage}</td>
       <th>좋아요</th>
       <td>
-      	${vo.good}(<a href="javascript:goodCheck()"> 😁👍 </a>)
+          ${vo.good}(<a href="javascript:goodCheck()"> 😁👍 </a>)
       <tr>
     <tr>
       <th>글내용</th>
@@ -60,7 +60,7 @@
     </tr>
     <tr>
       <td colspan="4" class="text-center">
-        <input type="button" value="돌아가기" onclick="location.href='${ctp}/BoardList.bo?rs=0';" class="btn btn-primary"/>
+        <input type="button" value="돌아가기" onclick="location.href='${ctp}/BoardList.bo?';" class="btn btn-primary"/>
       </td>
     </tr>
   </table>

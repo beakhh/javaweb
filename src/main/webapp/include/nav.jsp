@@ -32,8 +32,10 @@
 				      <a class="dropdown-item" href="${pageContext.request.contextPath}/mapping/Test5.do">URL매핑(확장자패턴1)</a>
 				      <a class="dropdown-item" href="${pageContext.request.contextPath}/mapping2/Test5.mi">URL매핑(확장자패턴2)</a>
 				      <a class="dropdown-item" href="${pageContext.request.contextPath}/study/0428_database/Login.re">로그인연습2</a>
-				      <a class="dropdown-item" href="${pageContext.request.contextPath}/Password.st">암호화 연습</a>
-				      <a class="dropdown-item" href="${pageContext.request.contextPath}/UuidForm.st">UUID 연습</a>
+				      <a class="dropdown-item" href="${pageContext.request.contextPath}/Password.st">암호화연습</a>
+				      <a class="dropdown-item" href="${pageContext.request.contextPath}/UuidForm.st">UUID연습</a>
+				      <a class="dropdown-item" href="${pageContext.request.contextPath}/AjaxTest1">aJax연습1</a>
+				      <a class="dropdown-item" href="${pageContext.request.contextPath}/UserList.st">aJax연습2</a>
 				    </div>
 				  </div>  
 	      </li>   
