@@ -2,18 +2,18 @@ show tables;
 
 create table board (
 	idx   int not null auto_increment,	/* 게시글의 고유번호 */
-	mid      varchar(20) not null,					/* 게시글 올린이 아이디 */
+	mid      varchar(20) not null,			/* 게시글 올린이 아이디 */
 	nickName varchar(20) not null,			/* 게시글 올린이 닉네임 */
-	title   varchar(100) not null,				/* 게시글 제목 */
-	email		varchar(50),							/* 이메일 주소 */
-	homePage varchar(50),							/* 홈페이지(개인블로그) 주소 */
-	content text not null,						/* 게시글 내용 */
-	readNum int default 0,						/* 글 조회수 */
-	hostIp  varchar(40) not null,			/* 글 올린이의 IP */
-	openSw  char(2)	default 'OK',			/* 게시글 공개여부(OK:공개,NO:비공개) */
+	title   varchar(100) not null,			/* 게시글 제목 */
+	email		varchar(50),								/* 이메일 주소 */
+	homePage varchar(50),								/* 홈페이지(개인블로그) 주소 */
+	content text not null,							/* 게시글 내용 */
+	readNum int default 0,							/* 글 조회수 */
+	hostIp  varchar(40) not null,				/* 글 올린이의 IP */
+	openSw  char(2)	default 'OK',				/* 게시글 공개여부(OK:공개,NO:비공개) */
 	wDate   datetime  default now(),		/* 글 올린 날짜/시간 */
-	good		int default 0,						/* '좋아요' 클릭 횟수 누적 */
-	primary key(idx)
+	good		int default 0,							/* '좋아요' 클릭 횟수 누적 */
+	primary key(idx)										/* 기본키 : 고유번호 */
 );
 
 desc board;
@@ -21,6 +21,26 @@ desc board;
 insert into board values (default,'admin','관리맨','게시판 서비스를 시작합니다.','cjsk1126@naver.com','cjsk1126.tistory.com','이곳은 게시판입니다.',default,'192.168.50.20',default,default,default);
 
 select * from board;
+
+/* 게시판에 댓글 달기 */
+create table boardReply (
+	idx		int not null auto_increment,		/*댓글의 고유번호*/
+	boardIdx int not null,								/* 원본글의 고유번호(외래키로 지정) */
+	mid		varchar(20) not null,						/* 댓글올린이의 아이디	*/
+	nickName varchar(20) not null, 				/* 댓글오린이의 닉네임	*/
+	wDate		datetime default now(),				/* 댓글 올린 날짜*/	
+	hostIp	varchar(50) not null,					/* 댓글 올린 PC의 고유 IP*/
+	content text not null, 								/* 댓글 내용 */
+	primary key(idx),											/* 기본키 : 고유번호 */
+	foreign key(boardIdx) references  board(idx) 	/* 외래키 설정 *//* 쉼표 안 쓰면 밑의 내용과 이어진거임*/
+	on update cascade											/**/
+	on delete restrict										/* 원본에서 */
+	
+);
+
+desc boardReply;
+
+
 
 /* 날짜함수 처리 연습 */
 select now();				/* 오늘 날짜 보여달라. */
@@ -73,6 +93,18 @@ select *, timestampdiff(hour,wDate,now()) as day_diff, timestampdiff(hour,wDate,
 /* 날짜양식( date_format() ): 4자리년도 년(%Y), 월(%m), 일(%d) */
 select date_format(wDate,'%Y-%m-%d %H:%i'),now() as hour_diff from board;
 select timestampdiff(hour,date_format(wDate,'%Y-%m-%d %H:%i'),now()) as hour_diff from board;
+
+
+
+
+/* 이전글 / 다음글 꺼내오기! */
+select * from board;
+select * from board where idx = 6;
+select * from board where idx < 6 order by idx desc limit 1;
+
+select idx, title from board where idx < 6 order by idx desc limit 1;  /*이전 글*/
+
+select idx, title from board where idx > 6 limit 1; /*다음 글*/
 
 
 

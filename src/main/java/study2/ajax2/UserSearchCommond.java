@@ -1,13 +1,13 @@
-package study2;
+package study2.ajax2;
 
 import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import study2.ajax2.UserDAO;
-import study2.ajax2.UserVO;
+import study2.StudyInterface;
 
 public class UserSearchCommond implements StudyInterface {
 
@@ -25,6 +25,8 @@ public class UserSearchCommond implements StudyInterface {
 		}
 		else {
 			str += idx + "/" + vo.getMid() + "/" + vo.getName() + "/" + vo.getAge() + "/" + vo.getAddress();
+			HttpSession session = request.getSession();
+			session.setAttribute("sTempMid", vo.getMid());
 		}
 		
 		response.getWriter().write(str);
