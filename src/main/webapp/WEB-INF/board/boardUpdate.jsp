@@ -8,6 +8,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>boardUpdate.jsp</title>
   <jsp:include page="/include/bs4.jsp" />
+  <style>
+    th {
+      text-align: center;
+      background-color: #eee;
+    }
+  </style>
   <script>
     'use strict';
     

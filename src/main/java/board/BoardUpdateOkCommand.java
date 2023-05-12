@@ -35,7 +35,7 @@ public class BoardUpdateOkCommand implements BoardInterface {
 		vo.setHomePage(homePage);
 		vo.setHostIp(hostIp);
 		vo.setOpenSw(openSw);
-//		System.out.println("vo : " + vo);
+		//System.out.println("vo : " + vo);
 		BoardDAO dao = new BoardDAO();
 		
 		int res = dao.setBoardUpdateOk(vo);
@@ -44,8 +44,9 @@ public class BoardUpdateOkCommand implements BoardInterface {
 			request.setAttribute("msg", "게시글이 수정되었습니다.");
 		}
 		else {
-			request.setAttribute("msg", "게시글이 수정실패~~");
+			request.setAttribute("msg", "게시글 수정실패~~");
 		}
 		request.setAttribute("url", request.getContextPath()+"/BoardContent.bo?idx="+idx+"&pag="+pag+"&pageSize="+pageSize);
 	}
+
 }

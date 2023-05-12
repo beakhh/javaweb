@@ -70,7 +70,6 @@ public class BoardContentCommand implements BoardInterface {
 		
 		
 		
-		
 		// 좋아요 토글처리에 대한 부분....(처음들어온글이면 세션변수 sGoodSwitch에 -1을 주므로서, 초기 값이 👍 로 나올 수 있게 처리한다. 그후는 'BoGoodPlusMinusCommand'객체에서 '+1/-1' 로 토글처리했다.
 		/*
 		ArrayList<String> goodSwitchCheck = (ArrayList) session.getAttribute("sGoodSwitchCheck");
