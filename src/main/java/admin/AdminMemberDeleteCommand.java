@@ -15,6 +15,7 @@ public class AdminMemberDeleteCommand implements AdminInterface {
 		int idx = Integer.parseInt(request.getParameter("idx"));
 		
 		MemberDAO dao = new MemberDAO();
+		
 		dao.setMemberDelete(idx);
 	}
 

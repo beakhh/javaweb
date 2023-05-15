@@ -34,9 +34,10 @@
     <tr><td>회원등급 : ${strLevel}</td></tr>
     <tr><td>총방문횟수 : ${vo.visitCnt}</td></tr>
     <tr><td>최초가입일 : ${vo.startDate}</td></tr>
-    <tr><td>최종접속일 : ${vo.lastDate}</td></tr>	
+    <tr><td>최종접속일 : ${vo.lastDate}</td></tr>
     <tr><td>오늘접속횟수 : ${vo.todayCnt}</td></tr>
   </table>
+  <br/>
   <input type="button" value="돌아가기" onclick="history.back()" class="btn btn-primary"/>
 </div>
 <p><br/></p>

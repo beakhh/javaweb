@@ -18,9 +18,10 @@ public class AdminMemberInforCommand implements AdminInterface {
 		int pageSize = request.getParameter("pageSize")=="" ? 1 : Integer.parseInt(request.getParameter("pageSize"));
 		
 		MemberDAO dao = new MemberDAO();
+		
 		MemberVO vo = dao.getMemberMidCheck(mid);
 		
-	// 레벨을 문자로 처리해서 넘겨준다.
+		// 레벨을 문자로 처리해서 넘겨준다.
 		String strLevel = "";
 		if(vo.getLevel() == 0) strLevel = "관리자";
 		else if(vo.getLevel() == 1) strLevel = "준회원";
@@ -32,6 +33,6 @@ public class AdminMemberInforCommand implements AdminInterface {
 		request.setAttribute("pag", pag);
 		request.setAttribute("pageSize", pageSize);
 		request.setAttribute("strLevel", strLevel);
-		
 	}
+
 }
