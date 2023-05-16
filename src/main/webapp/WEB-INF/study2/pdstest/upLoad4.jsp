@@ -48,8 +48,8 @@
     <input type="file" name="fName" id="file" multiple class="form-control-file border mb-2">
     <input type="button" value="전송" onclick="fCheck()" class="btn btn-success form-control"/>
   </form>
-   <hr/>
-  <input type="button" value="다운로드사이트로이동" onclick="location.href='${ctp}/DownLoad.st';" class="btn btn-secondary"/>
+  <hr/>
+  <input type="button" value="다운로드사이트로이동" onclick="location.href='${ctp}/DownLoad.st';" class="btn btn-primary form-control"/>
 </div>
 <p><br/></p>
 <jsp:include page="/include/footer.jsp" />
