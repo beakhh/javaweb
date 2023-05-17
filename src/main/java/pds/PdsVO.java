@@ -16,6 +16,9 @@ public class PdsVO {
 	private String content;
 	private String hostIp;
 	
+	private int day_diff;		// 새글처리를 위한 변수
+	private int hour_diff;	// 새글처리를 위한 변수
+	
 	public int getIdx() {
 		return idx;
 	}
@@ -100,10 +103,23 @@ public class PdsVO {
 	public void setHostIp(String hostIp) {
 		this.hostIp = hostIp;
 	}
+	public int getDay_diff() {
+		return day_diff;
+	}
+	public void setDay_diff(int day_diff) {
+		this.day_diff = day_diff;
+	}
+	public int getHour_diff() {
+		return hour_diff;
+	}
+	public void setHour_diff(int hour_diff) {
+		this.hour_diff = hour_diff;
+	}
 	@Override
 	public String toString() {
 		return "PdsVO [idx=" + idx + ", mid=" + mid + ", nickName=" + nickName + ", fName=" + fName + ", fSName=" + fSName
 				+ ", fSize=" + fSize + ", title=" + title + ", part=" + part + ", pwd=" + pwd + ", fDate=" + fDate
-				+ ", downNum=" + downNum + ", openSw=" + openSw + ", content=" + content + ", hostIp=" + hostIp + "]";
+				+ ", downNum=" + downNum + ", openSw=" + openSw + ", content=" + content + ", hostIp=" + hostIp + ", day_diff="
+				+ day_diff + ", hour_diff=" + hour_diff + "]";
 	}
 }

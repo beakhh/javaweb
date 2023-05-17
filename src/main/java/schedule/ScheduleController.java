@@ -1,4 +1,4 @@
-package pds;
+package schedule;
 
 import java.io.IOException;
 
@@ -11,12 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @SuppressWarnings("serial")
-@WebServlet("*.pds")
-public class PdsController extends HttpServlet {
+@WebServlet("*.sc")
+public class ScheduleController extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PdsInterface command = null;
-		String viewPage = "/WEB-INF/pds";
+		ScheduleInterface command = null;
+		String viewPage = "/WEB-INF/schedule";
 		
 		String uri = request.getRequestURI();
 		String com = uri.substring(uri.lastIndexOf("/"),uri.lastIndexOf("."));
@@ -29,40 +29,20 @@ public class PdsController extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/");
 			dispatcher.forward(request, response);
 		}
-		else if(com.equals("/PdsList")) {
-			command = new PdsListCommand();
+		else if(com.equals("/ScheduleList")) {
+			command = new ScheduleListCommand();
 			command.execute(request, response);
-			viewPage += "/pdsList.jsp";
+			viewPage += "/scheduleList.jsp";
 		}
-		else if(com.equals("/PdsInput")) {
-			command = new PdsInputCommand();
+		else if(com.equals("/ScheduleMenu")) {
+			command = new ScheduleMenuCommand();
 			command.execute(request, response);
-			viewPage += "/pdsInput.jsp";
+			viewPage += "/scheduleMenu.jsp";
 		}
-		else if(com.equals("/PdsInputOk")) {
-			command = new PdsInputOkCommand();
-			command.execute(request, response);
-			viewPage = "/include/message.jsp";
-		}
-		else if(com.equals("/PdsDownNumCheck")) {
-			command = new PdsDownNumCheckCommand();
+		else if(com.equals("/ScheduleInputOk")) {
+			command = new ScheduleInputOkCommand();
 			command.execute(request, response);
 			return;
-		}
-		else if(com.equals("/PdsDeleteCheck")) {
-			command = new PdsDeleteCheckCommand();
-			command.execute(request, response);
-			return;
-		}
-		else if(com.equals("/PdsTotalDown")) {
-			command = new PdsTotalDownCommand();
-			command.execute(request, response);
-			return;
-		}
-		else if(com.equals("/PdsContent")) {
-			command = new PdsContentCommand();
-			command.execute(request, response);
-			viewPage += "/pdsContent.jsp";
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);

@@ -34,7 +34,7 @@
     	});
     }
     
-    // 파일 삭제처리(ajax)
+    // 파일 삭제처리(ajax) - prompt창을 통해 비번 받아서 삭제처리
     function pdsDeleteCheck(idx, fSName) {
     	let ans = confirm("선택된 자표파일을 삭제하시겠습니까?");
     	if(!ans) return false;
@@ -64,6 +64,7 @@
     		}
     	});
     }
+    
   </script>
 </head>
 <body>
@@ -103,10 +104,19 @@
     </tr>
     <c:forEach var="vo" items="${vos}" varStatus="st">
       <tr>
-        <td>${vo.idx}</td>
-        <td>${vo.title}</td>
+        <td>${curScrStartNo}</td>
+        <td>
+          <a href="${ctp}/PdsContent.pds?idx=${vo.idx}&pag=${pag}&part=${part}">${vo.title}</a>
+    	    <c:if test="${vo.hour_diff <= 24}"><img src="${ctp}/images/new.gif"/></c:if>
+        </td>
         <td>${vo.nickName}</td>
-        <td>${vo.fDate}</td>
+        <td>
+          <%-- ${vo.fDate} --%>
+          <c:if test="${vo.hour_diff > 24}">${fn:substring(vo.fDate,0,10)}</c:if>
+          <c:if test="${vo.hour_diff < 24}">		<!-- 24시간이 지나지 않았지만 현재시간~자정까찌는 '날짜:시간', 나머지는 '시간'만 출력 -->
+    	      ${vo.day_diff > 0 ? fn:substring(vo.fDate,0,16) : fn:substring(vo.fDate,11,19)}
+    	    </c:if>
+        </td>
         <td>${vo.part}</td>
         <td>
           <c:set var="fNames" value="${fn:split(vo.fName,'/')}"/>
@@ -118,9 +128,10 @@
         </td>
         <td>${vo.downNum}</td>
         <td>
+          <%-- <a href="#" onclick="modalView('${vo.title}','${vo.nickName}','${vo.mid}','${vo.part}','${vo.fName}','${vo.fSName}','${vo.fSize}','${vo.downNum}','${vo.fDate}')" class="badge badge-info" data-toggle="modal" data-target="#myModal">모달창</a><br/> --%>
           <a href="${ctp}/PdsTotalDown.pds?idx=${vo.idx}" class="badge badge-primary">전체다운</a><br/>
           <a href="javascript:pdsDeleteCheck('${vo.idx}','${vo.fSName}')" class="badge badge-danger">삭제1</a>
-          <a href="javascript:pdsDeleteCheck('${vo.idx}','${vo.fSName}')" class="badge badge-warning">삭제2</a>
+          <%-- <a href="#" onclick="pdsDelCheckModal('${vo.idx}','${vo.fSName}')" data-toggle="modal" data-target="#myPwdModal" class="badge badge-danger">삭제2</a> --%>
         </td>
       </tr>
     </c:forEach>
@@ -128,7 +139,32 @@
   </table>
 </div>
 
-<!-- 블록페이지 -->
+<!-- 블록 페이지 시작 -->
+<div class="text-center">
+  <ul class="pagination justify-content-center">
+    <c:if test="${pag > 1}">
+      <li class="page-item"><a class="page-link text-secondary" href="${ctp}/PdsList.pds?part=${part}&pag=1">첫페이지</a></li>
+    </c:if>
+    <c:if test="${curBlock > 0}">
+      <li class="page-item"><a class="page-link text-secondary" href="${ctp}/PdsList.pds?part=${part}&pag=${(curBlock-1)*blockSize + 1}">이전블록</a></li>
+    </c:if>
+    <c:forEach var="i" begin="${(curBlock)*blockSize + 1}" end="${(curBlock)*blockSize + blockSize}" varStatus="st">
+      <c:if test="${i <= totPage && i == pag}">
+    		<li class="page-item active"><a class="page-link bg-secondary border-secondary" href="${ctp}/PdsList.pds?part=${part}&pag=${i}">${i}</a></li>
+    	</c:if>
+      <c:if test="${i <= totPage && i != pag}">
+    		<li class="page-item"><a class="page-link text-secondary" href="${ctp}/PdsList.pds?part=${part}&pag=${i}">${i}</a></li>
+    	</c:if>
+    </c:forEach>
+    <c:if test="${curBlock < lastBlock}">
+      <li class="page-item"><a class="page-link text-secondary" href="${ctp}/PdsList.pds?part=${part}&pag=${(curBlock+1)*blockSize + 1}">다음블록</a></li>
+    </c:if>
+    <c:if test="${pag < totPage}">
+      <li class="page-item"><a class="page-link text-secondary" href="${ctp}/PdsList.pds?part=${part}&pag=${totPage}">마지막페이지</a></li>
+    </c:if>
+  </ul>
+</div>
+<!-- 블록 페이지 끝 -->
 
 <p><br/></p>
 <jsp:include page="/include/footer.jsp" />
