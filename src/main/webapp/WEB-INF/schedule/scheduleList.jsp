@@ -24,13 +24,13 @@
 <p><br/></p>
 <div class="container">
   <div class="text-center">
-	  <button type="button" onclick="location.href='${ctp}/Calendar2.st?yy=${yy-1}&mm=${mm}';" class="btn btn-secondary btn-sm" title="이전년도">◁◁</button>
-	  <button type="button" onclick="location.href='${ctp}/Calendar2.st?yy=${yy}&mm=${mm-1}';" class="btn btn-secondary btn-sm" title="이전월">◀</button>
+	  <button type="button" onclick="location.href='${ctp}/ScheduleList.sc?yy=${yy-1}&mm=${mm}';" class="btn btn-secondary btn-sm" title="이전년도">◁◁</button>
+	  <button type="button" onclick="location.href='${ctp}/ScheduleList.sc?yy=${yy}&mm=${mm-1}';" class="btn btn-secondary btn-sm" title="이전월">◀</button>
 	  <font size="5">${yy}년 ${mm+1}월</font>
-	  <button type="button" onclick="location.href='${ctp}/Calendar2.st?yy=${yy}&mm=${mm+1}';" class="btn btn-secondary btn-sm" title="다음월">▶</button>
-		<button type="button" onclick="location.href='${ctp}/Calendar2.st?yy=${yy+1}&mm=${mm}';" class="btn btn-secondary btn-sm" title="다음년도">▷▷</button>
+	  <button type="button" onclick="location.href='${ctp}/ScheduleList.sc?yy=${yy}&mm=${mm+1}';" class="btn btn-secondary btn-sm" title="다음월">▶</button>
+		<button type="button" onclick="location.href='${ctp}/ScheduleList.sc?yy=${yy+1}&mm=${mm}';" class="btn btn-secondary btn-sm" title="다음년도">▷▷</button>
 		&nbsp;&nbsp;
-		<button type="button" onclick="location.href='${ctp}/Calendar2.st';" class="btn btn-secondary btn-sm" title="오늘날짜">홈</button>
+		<button type="button" onclick="location.href='${ctp}/ScheduleList.sc';" class="btn btn-secondary btn-sm" title="오늘날짜">홈</button>
   </div>
   <br/>
   <div class="text-center">
@@ -56,17 +56,31 @@
       	<c:forEach begin="1" end="${lastDay}" varStatus="st">
       	  <c:set var="todaySw" value="${toYear==yy && toMonth==mm && toDay==st.count ? 1 : 0}" />
       	  <td id="td${gap}" ${todaySw==1 ? 'class=today' : ''} style="text-align:left;vertical-align:top;height:90px">
-      	  	<c:set var="ymd" value="${yy}-${mm+1}-${st.count}"/>
+      	    <c:set var="ymd" value="${yy}-${mm+1}-${st.count}"/>
       	    <a href="${ctp}/ScheduleMenu.sc?ymd=${ymd}">
-      	    	${st.count}
-      	    <br/>
+	      	    ${st.count}<br/>
 	      	    
 	      	    <!-- 해당날짜에 일정이 있다면 part를 출력하게 한다. -->
+	      	    <c:set var="tempPart" value=""/>
+            	<c:set var="tempCnt" value="0"/>
+            	<c:set var="tempSw" value="0"/>
+            	
 	      	    <c:forEach var="vo" items="${vos}">
 	      	      <c:if test="${fn:substring(vo.sDate,8,10)==st.count}">
-	        	      ${vo.part}<br/>
+	      	      
+	        	      <c:if test="${vo.part != tempPart}">
+                    <c:if test="${tempSw != 0}">
+	                    - ${tempPart}(${tempCnt})건<br/>
+	                    <c:set var="tempCnt" value="0"/>
+                    </c:if>
+                    <c:set var="tempPart" value="${vo.part}"/>                  
+                  </c:if>
+                  <c:set var="tempSw" value="1"/>
+                  <c:set var="tempCnt" value="${tempCnt + 1}"/>
+                  
 	        	    </c:if>
 	      	    </c:forEach>
+	      	    <c:if test="${tempCnt != 0}">- ${tempPart}(${tempCnt})건</c:if>
       	    </a>
       	  </td>
       	  <c:if test="${gap % 7 == 0}"></tr><tr></c:if>

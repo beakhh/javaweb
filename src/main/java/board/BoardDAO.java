@@ -261,7 +261,7 @@ public class BoardDAO {
 	public int setBoardUpdateOk(BoardVO vo) {
 		int res = 0;
 		try {
-			System.out.println("vo(updateOk) : " + vo);
+			//System.out.println("vo(updateOk) : " + vo);
 			sql = "update board set title=?, email=?, homePage=?, content=?, hostIp=?, openSw=? where idx=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getTitle());

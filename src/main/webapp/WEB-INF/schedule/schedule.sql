@@ -54,7 +54,9 @@ select * from schedule where mid='hkd1234' and date_format(sDate,'%Y-%m') = '202
 
 
 
-
+select * , (select count(*) from schedule where part = a.part and sDate = a.sDate) as b 
+	from schedule as a 
+	where mid='hkd1234' and date_format(sDate,'%Y-%m') = '2023-05' group by part, sDate  order by sDate, part ;
 
 
 

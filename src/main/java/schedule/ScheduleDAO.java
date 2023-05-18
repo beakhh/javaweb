@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import conn.GetConn;
-import pds.PdsVO;
 
 public class ScheduleDAO {
 	// 싱클톤으로 선언된 DB연결객체(GetConn)을 연결한다.
@@ -63,6 +62,42 @@ public class ScheduleDAO {
 			pstmt.setString(2, vo.getsDate());
 			pstmt.setString(3, vo.getPart());
 			pstmt.setString(4, vo.getContent());
+			pstmt.executeUpdate();
+			res = "1";
+		} catch (SQLException e) {
+			System.out.println("SQL 에러 : " + e.getMessage());
+		} finally {
+			getConn.pstmtClose();
+		}
+		return res;
+	}
+
+	// 스케줄 수정처리
+	public String setScheduleUpdateOk(ScheduleVO vo) {
+		String res = "0";
+		try {
+			sql = "update schedule set part=?, content=? where idx = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getPart());
+			pstmt.setString(2, vo.getContent());
+			pstmt.setInt(3, vo.getIdx());
+			pstmt.executeUpdate();
+			res = "1";
+		} catch (SQLException e) {
+			System.out.println("SQL 에러 : " + e.getMessage());
+		} finally {
+			getConn.pstmtClose();
+		}
+		return res;
+	}
+
+	// 스케줄 삭제처리
+	public String setScheduleDeleteOk(int idx) {
+		String res = "0";
+		try {
+			sql = "delete from schedule where idx=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
 			pstmt.executeUpdate();
 			res = "1";
 		} catch (SQLException e) {
