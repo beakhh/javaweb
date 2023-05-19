@@ -65,7 +65,7 @@ public class MemberJoinOkCommand implements MemberInterface {
 			return;
 		}
 		
-		vo = dao.getMemberMidCheck(nickName);
+		vo = dao.getMemberNickCheck(nickName);
 		if(vo.getNickName() != null) {
 			request.setAttribute("msg", "이미 사용중인 닉네임입니다.");
 			request.setAttribute("url", request.getContextPath()+"/MemberJoin.mem");

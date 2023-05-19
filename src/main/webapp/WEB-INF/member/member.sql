@@ -33,3 +33,14 @@ desc member;
 
 drop table member;
 
+create table memberChat (
+  idx   int  not null auto_increment primary key,
+  nickName varchar(20) not null,
+  chat  varchar(100) not null
+);
+desc memberChat;
+drop table memberChat;
+
+select * from memberChat order by idx desc limit 50;
+
+select chat.* from (select * from memberChat order by idx desc limit 50) chat order by idx asc;
